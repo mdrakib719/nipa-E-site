@@ -62,3 +62,32 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?>
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "easelife2";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get form data
+$customer_id = 1; // Replace with session user ID
+$booking_id = $_POST['booking_id'];
+$complaint = $_POST['complaint'];
+
+// Insert into complaints table
+$sql = "INSERT INTO complaints (customer_id, booking_id, complaint) VALUES ('$customer_id', '$booking_id', '$complaint')";
+if ($conn->query($sql) === TRUE) {
+    echo "Complaint submitted successfully!";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
