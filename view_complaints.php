@@ -21,9 +21,17 @@
             </thead>
             <tbody>
                 <?php
-                // Sample PHP code to fetch complaints from database
-                include 'db_connection.php'; // Ensure your database connection file is included
+                $servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "easelife2";
 
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
                 $sql = "SELECT complaints.id, users.username, complaints.message, complaints.status 
                         FROM complaints 
                         JOIN users ON complaints.user_id = users.id";
